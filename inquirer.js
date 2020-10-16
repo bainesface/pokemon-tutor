@@ -12,7 +12,6 @@ const firstQuestions = [
     type: 'list',
     name: 'pokemon',
     message: 'Which pokemon do you choose?',
-    choices: ['Pikachu', 'Magikarp'],
   },
   {
     type: 'input',
@@ -29,10 +28,46 @@ const firstQuestions = [
     type: 'number',
     name: 'attackDamage',
     message: "What is your pokemon's attack damage",
+    validate: function (value) {
+      if (value <= 20) {
+        return true;
+      } else return "Don't be so cocky! Pick a number less than 20";
+    },
   },
 ];
 const secondQuestions = [
-  //... see examples to how to format questions
+  {
+    type: 'input',
+    name: 'name',
+    message: 'What is your name?',
+    default: 'Ash',
+  },
+  {
+    type: 'input',
+    name: 'pokemon',
+    message: 'Which pokemon do you choose?',
+  },
+  {
+    type: 'input',
+    name: 'sound',
+    message: 'What sound does your Pokemon make?',
+    default: 'pika pika',
+  },
+  {
+    type: 'input',
+    name: 'move',
+    message: "What is your pokemon's special move?",
+  },
+  {
+    type: 'number',
+    name: 'attackDamage',
+    message: "What is your pokemon's attack damage",
+    validate: function (value) {
+      if (value <= 20) {
+        return true;
+      } else return "Don't be so cocky! Pick a number less than 20";
+    },
+  },
 ];
 function playGame() {
   inquirer
@@ -42,10 +77,12 @@ function playGame() {
       const pokemon1 = new Pokemon(
         firstAnswers.pokemon,
         firstAnswers.sound,
-        firstAnswers.move
+        firstAnswers.move,
+        firstAnswers.attackDamage
       );
-      //console.log(trainer1);
-      console.log(pokemon1);
+
+      trainer1.catch(pokemon1);
+      console.log(trainer1);
 
       return inquirer.prompt(secondQuestions);
     })
