@@ -1,7 +1,42 @@
-function Pokemon(name, hitPoints = 10, attackDamage = 2) {
+//fire > grass
+//water > fire
+//grass > water
+function Pokemon(
+  name,
+  hitPoints = 10,
+  attackDamage = 2,
+  sound,
+  move,
+  type = 'normal'
+) {
   this.name = name;
   this.hitPoints = hitPoints;
   this.attackDamage = attackDamage;
+  this.sound = sound;
+  this.move = move;
+  this.type = type;
+  this.strength = 'none';
+  this.weakness = 'none';
+  this.setStrAndWeak = setStrAndWeak;
 }
 
-module.exports = Pokemon;
+const strengthsAndWeaknesses = {
+  grass: { strength: 'water', weakness: 'fire' },
+  water: { strength: 'fire', weakness: 'grass' },
+  fire: { strength: 'grass', weakness: 'water' },
+};
+
+function setStrAndWeak(type) {
+  this.strength = strengthsAndWeaknesses[type].strength;
+  this.weakness = strengthsAndWeaknesses[type].weakness;
+}
+
+Pokemon.prototype.talk = function () {
+  return this.sound;
+};
+
+Pokemon.prototype.useYourMoves = function () {
+  return this.move;
+};
+
+module.exports = { Pokemon, setStrAndWeak };
