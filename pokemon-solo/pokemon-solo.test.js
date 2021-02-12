@@ -1,4 +1,5 @@
-const { Pokemon, setStrAndWeak } = require('./pokemon-solo');
+//const { Pokemon } = require('./pokemon-solo');
+const { Pokemon } = require('./pokemon-class');
 
 describe('Pokemon', () => {
   it('Pokemon constructor returns a new instance object', () => {
